@@ -12,6 +12,49 @@ layout: default
     {{ content }}
   </article>
 
+  {% capture page_cat %}{{ page.categories }}{% endcapture %}
+  {% assign also_show = 0 %}
+  {% for category in site.categories %}
+    {% assign cat_name = category | first %}
+    {% if cat_name == page_cat %}
+      {% for posts in category %}
+        {% for post in posts %}
+          {% if post.url and post.title != page.title %}
+            {% assign also_show = 1 %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  <p class="see-also">
+  {% for category in site.categories %}
+    {% assign cat_name = category | first %}
+    {% assign cat_label = site.data.categories[cat_name].label %}
+
+    {% if cat_name == page_cat %}
+      <hr/>
+      {% if also_show == 0 %}
+        <p>There are no other posts in category {{ cat_label }}</p>
+      {% else %}
+        <p>Other posts in category {{ cat_label }}:
+          <ul>
+            {% for posts in category %}
+              {% for post in posts %}
+                {% if post.url and post.title != page.title %}
+                  <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                    ({{ post.date | date: '%d %B %Y'}})
+                  </li>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </p>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  </p>
+
 </div>
 
 <div id="disqus_thread"></div>

@@ -2,7 +2,7 @@
 layout: post
 title:  "Partitioning a Linked List"
 date:   2015-04-26 00:00:00
-categories: data_structures
+categories: linked_lists
 ---
 
 [Linked lists][1] are very flexible but require some finesse when handling

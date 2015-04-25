@@ -1,0 +1,15 @@
+# Site settings
+title: Pure Thought
+email: gonzalo.diethelm@diethelm.org
+description: >
+  Thoughts = Algorithms + Data Structures
+baseurl: ""
+url: "http://gonzus.github.io"
+# twitter_username: jekyllrb
+github_username:  gonzus
+
+show_email: false
+show_title_big: false
+
+# Build settings
+markdown: kramdown

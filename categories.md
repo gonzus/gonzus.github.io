@@ -6,8 +6,9 @@ permalink: /categories/
 
 
 {% for category in site.categories %}
-  {% capture cat_name %}{{ category | first }}{% endcapture %}
-  <li>{{ site.data.categories[cat_name].label }}
+  {% assign cat_name = category | first %}
+  {% assign cat_label = site.data.categories[cat_name].label %}
+  <li>{{ cat_label }}
     <ul>
     {% for posts in category %}
       {% for post in posts %}

@@ -5,69 +5,19 @@ layout: default
 
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+    <p class="post-meta">
+      {{ page.date | date: "%b %-d, %Y" }}
+
+      {% if page.author %} • {{ page.author }}{% endif %}
+      {% if page.meta   %} • {{ page.meta   }}{% endif %}
+    </p>
   </header>
 
   <article class="post-content">
     {{ content }}
   </article>
 
-  {% capture page_cat %}{{ page.categories }}{% endcapture %}
-  {% assign also_show = 0 %}
-  {% for category in site.categories %}
-    {% assign cat_name = category | first %}
-    {% if cat_name == page_cat %}
-      {% for posts in category %}
-        {% for post in posts %}
-          {% if post.url and post.title != page.title %}
-            {% assign also_show = 1 %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-    {% endif %}
-  {% endfor %}
+  {% include see-also.html %}
 
-  <p class="see-also">
-  {% for category in site.categories %}
-    {% assign cat_name = category | first %}
-    {% assign cat_label = site.data.categories[cat_name].label %}
-
-    {% if cat_name == page_cat %}
-      <hr/>
-      {% if also_show == 0 %}
-        <p>There are no other posts in category {{ cat_label }}</p>
-      {% else %}
-        <p>Other posts in category {{ cat_label }}:
-          <ul>
-            {% for posts in category %}
-              {% for post in posts %}
-                {% if post.url and post.title != page.title %}
-                  <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-                    ({{ post.date | date: '%d %B %Y'}})
-                  </li>
-                {% endif %}
-              {% endfor %}
-            {% endfor %}
-          </ul>
-        </p>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-  </p>
-
+  {% include comments.html %}
 </div>
-
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  /* * * CONFIGURATION VARIABLES * * */
-  var disqus_shortname = 'purethought';
-
-  /* * * DON'T EDIT BELOW THIS LINE * * */
-  (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-</noscript>

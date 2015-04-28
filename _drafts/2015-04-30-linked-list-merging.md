@@ -15,11 +15,11 @@ lst2 in the process of building lst0.`_
 For example, if `lst1` contains `(4 8 20 32 41)` and `lst2` contains `(1 10 15
 20 25)`, `lst0` should contain `(1 4 8 10 15 20 20 25 32 41)`.  Notice that
 repeated elements must appear multiple times in the answer, such that
-`lst0.size() = lst1.size() + lst2.size()`.
+`lst0.size() == lst1.size() + lst2.size()`.
 
 No matter what type of collection is being processed, merging sorted
-collections in general should be an O(n) algorithm.  This takes advantage of
-the order in the input collections; if the inputs are unsorted, merging
+collections in general should be an O(n) algorithm; this takes advantage of
+the order in the input collections.  If the inputs are unsorted, merging
 becomes O(n*log(n)), which is equivalent to first sorting the input
 collections and then merging them (although there are better ways to proceed
 in this case).
@@ -85,12 +85,12 @@ void List::merge(List* lst1,
 }
 {% endhighlight %}
 
-If you read the [previous post on partitioning a linked list][1], you will
-notice this merging algorithm does not comply with the recommendation of using
-an open-ended right side to represent the linked list.  The reason for this is
-that we wish to use the two building blocks we have reviewed, partitioning and
+If you read the [previous post on splitting a linked list][1], you will notice
+this merging algorithm does not comply with the recommendation of using an
+open-ended right side to represent the linked list.  The reason for this is
+that we wish to use the two building blocks we have reviewed, splitting and
 merging, to implement a well-behaved sorting algorithm on linked lists; this
 requires that the merging algorithm returns the actual first and last nodes in
 the answer, for reasons that will be made clear in the next post.
 
-[1]: {% post_url 2015-04-26-linked-list-partitioning %}
+[1]: {% post_url 2015-04-26-linked-list-splitting %}

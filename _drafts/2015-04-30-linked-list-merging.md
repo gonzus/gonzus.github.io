@@ -38,8 +38,8 @@ void List::merge(List* lst1,
   Node* last = 0;
 
   // Two pointers to keep track of where we are in the iteration
-  Node* p1 = lst1;
-  Node* p2 = lst2;
+  Node* p1 = lst1->beg();
+  Node* p2 = lst2->beg();
 
   // Here we go:
   while (1) {
